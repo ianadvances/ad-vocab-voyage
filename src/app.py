@@ -1,8 +1,17 @@
 import streamlit as st
-from .agents import process_vocab_query, generate_workflow_graph
-from .database import VocabDatabase
-from .config import get_streamlit_config, get_chat_config, config
+import sys
+import os
 import uuid
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from src.agents import process_vocab_query, generate_workflow_graph
+from src.config import get_streamlit_config, get_chat_config, config
+
+# 根據環境變數選擇資料庫實作
+if config.is_development():
+    sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'notebooks'))
+    from models_sqlite import VocabDatabase
+else:
+    from src.database import VocabDatabase
 
 def parse_vocab_response(response: str) -> dict:
     """解析工具回應的內容,區分是否為結構化單字資訊"""

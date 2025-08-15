@@ -42,9 +42,9 @@ graph TB
     end
     
     subgraph "資料層 (Data Layer)"
-        FIREBASE[(Firebase<br/>Realtime Database)]
-        CHROMA[(ChromaDB<br/>向量資料庫)]
-        SQLITE[(SQLite<br/>本地資料庫)]
+        FIREBASE[(Firebase<br/>Realtime Database<br/>生產環境)]
+        CHROMA[(ChromaDB<br/>向量資料庫<br/>詞彙檢索)]
+        SQLITE[(SQLite<br/>本地資料庫<br/>開發環境)]
     end
     
     subgraph "外部服務 (External Services)"
@@ -412,6 +412,42 @@ def setup_rag():
     }
 }
 ```
+
+### 資料庫架構設計
+
+VocabVoyage 採用多資料庫架構，根據部署環境和用途自動選擇合適的資料庫：
+
+| 環境類型 | 資料庫類型 | 檔案位置 | 用途 | 特點 |
+|---------|-----------|----------|------|------|
+| 本地開發 | SQLite | `data/vocab_learning.db` | 開發和測試 | 輕量級、無需配置、適合個人使用 |
+| 生產環境 | Firebase Realtime DB | 雲端 | 正式部署 | 即時同步、多用戶支援、雲端備份 |
+| 通用 | ChromaDB | `data/chroma_db/` | 向量檢索 | 語義搜尋、RAG 支援 |
+
+#### 環境切換邏輯
+
+系統根據 `ENV` 環境變數自動選擇資料庫類型：
+
+```python
+# 在 src/app.py 中的自動切換邏輯
+if config.is_development():  # ENV=local/dev/development/loc
+    from notebooks.models_sqlite import VocabDatabase  # SQLite 版本
+else:  # ENV=prod/production
+    from src.database import VocabDatabase  # Firebase 版本
+```
+
+**SQLite 模式特點**：
+- ✅ 無需網路連線即可運行
+- ✅ 零配置，自動初始化
+- ✅ 適合開發和個人使用
+- ✅ 資料儲存在本地檔案中
+- ⚠️ 不支援多用戶同時存取
+
+**Firebase 模式特點**：
+- ✅ 支援多用戶即時同步
+- ✅ 雲端備份和恢復
+- ✅ 高可用性和擴展性
+- ⚠️ 需要網路連線和 API 配置
+- ⚠️ 可能產生使用費用
 
 ### 5. 資料庫架構
 

@@ -18,6 +18,18 @@ VocabVoyage 是一個互動式英語詞彙學習平台，旨在幫助使用者�
 
 ### 後端技術
 - **Python**：核心開發語言
+- **Firebase Realtime Database**：雲端即時資料庫（生產環境）
+- **SQLite**：本地資料庫（開發環境，檔案位置：`data/vocab_learning.db`）
+- **LangChain & LangGraph**：用於構建 LLM 工作流程
+- **OpenAI API**：提供 GPT 模型支援
+- **Google Vertex AI**：提供 Gemini 模型支援
+
+#### 資料庫支援
+VocabVoyage 支援多種資料庫後端，根據環境變數自動切換：
+- **生產環境** (`ENV=prod`)：使用 Firebase Realtime Database
+- **開發環境** (`ENV=local/dev/development/loc`)：使用本地 SQLite 資料庫
+- SQLite 資料庫檔案自動創建於 `data/vocab_learning.db`
+- 本地模式無需 Firebase 配置，適合開發和個人使用
 - **Firebase Realtime Database**：主要資料儲存解決方案
 - **LangChain & LangGraph**：用於構建 LLM 工作流程
 - **OpenAI API**：提供 GPT 模型支援

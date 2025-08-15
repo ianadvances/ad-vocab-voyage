@@ -21,10 +21,13 @@ from langgraph.graph.message import add_messages
 from pydantic import BaseModel, Field
 import graphviz
 import pprint
-from .database import VocabDatabase
 from .config import get_openai_config, get_chroma_config, get_chat_config, config
 
 # 初始化資料庫連接
+if config.is_development():
+    from notebooks.models_sqlite import VocabDatabase
+else:
+    from .database import VocabDatabase
 db = VocabDatabase()
 
 

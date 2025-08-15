@@ -211,6 +211,30 @@ cp firebase-key.example.json FirebaseKey.json
 
 ### 4. 環境配置
 
+#### 資料庫配置選項
+
+VocabVoyage 支援兩種資料庫模式，根據 `ENV` 環境變數自動切換：
+
+**本地開發模式（推薦用於開發和個人使用）**：
+```env
+ENV=local  # 或 dev, development, loc
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
+**生產模式（用於正式部署）**：
+```env
+ENV=prod
+OPENAI_API_KEY=your_openai_api_key_here
+GOOGLE_APPLICATION_CREDENTIALS=./FirebaseKey.json
+FIREBASE_DATABASE_URL=https://your-project-default-rtdb.firebaseio.com/
+```
+
+**重要說明**：
+- 當 `ENV` 設定為 `local`, `dev`, `development`, 或 `loc` 時，系統會自動使用本地 SQLite 資料庫
+- SQLite 資料庫檔案會自動創建於 `data/vocab_learning.db`
+- 本地模式不需要 Firebase 配置，可以跳過 Firebase 相關設定步驟
+- 首次啟動時，系統會自動初始化 SQLite 資料庫結構
+
 #### 編輯 .env 檔案
 ```bash
 # 使用您偏好的編輯器開啟 .env
