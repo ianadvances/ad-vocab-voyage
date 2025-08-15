@@ -1,0 +1,46 @@
+# 開發和測試檔案
+examples/
+docs/
+*.md
+README.md
+
+# 環境和配置檔案
+.env
+.env.example
+firebase-key.example.json
+FirebaseKey.json
+
+# Git 相關
+.git/
+.gitignore
+
+# Python 快取和測試
+*.pyc
+__pycache__/
+.pytest_cache/
+.coverage
+*.egg-info/
+dist/
+build/
+
+# IDE 和編輯器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 系統檔案
+.DS_Store
+**/.DS_Store
+
+# 日誌檔案
+*.log
+logs/
+
+# 資料庫檔案（在容器中不需要）
+data/chroma_db/
+data/vocab_learning.db
+
+# Kiro 相關
+.kiro/

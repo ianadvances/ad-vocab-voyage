@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  vocabvoyage:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+    env_file:
+      - .env
+    volumes:
+      # 掛載資料目錄以持久化資料
+      - ./data:/app/data
+      # 掛載 Firebase 金鑰檔案
+      - ./FirebaseKey.json:/app/FirebaseKey.json:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # 開發環境服務（可選）
+  vocabvoyage-dev:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      - PORT=8501
+    env_file:
+      - .env
+    volumes:
+      # 開發時掛載整個專案目錄
+      - .:/app
+      - /app/__pycache__
+    command: streamlit run --server.port 8501 --server.address 0.0.0.0 src/app.py
+    restart: unless-stopped
+    profiles:
+      - dev

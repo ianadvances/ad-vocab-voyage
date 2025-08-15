@@ -1,0 +1,27 @@
+{
+  "_comment": "Firebase 服務帳戶金鑰範例檔案",
+  "_instructions": {
+    "zh": "請將此檔案重新命名為 FirebaseKey.json 並填入實際的服務帳戶金鑰資訊",
+    "how_to_get": [
+      "1. 前往 Firebase Console (https://console.firebase.google.com/)",
+      "2. 選擇您的專案",
+      "3. 點擊左側選單的「專案設定」(齒輪圖示)",
+      "4. 切換到「服務帳戶」分頁",
+      "5. 點擊「產生新的私密金鑰」",
+      "6. 下載 JSON 檔案並重新命名為 FirebaseKey.json",
+      "7. 將檔案放在專案根目錄"
+    ],
+    "security_note": "請勿將實際的金鑰檔案提交到版本控制系統中"
+  },
+  "type": "service_account",
+  "project_id": "your-firebase-project-id",
+  "private_key_id": "your-private-key-id-here",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nyour-private-key-content-here\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-xxxxx@your-project-id.iam.gserviceaccount.com",
+  "client_id": "your-client-id-here",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-xxxxx%40your-project-id.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

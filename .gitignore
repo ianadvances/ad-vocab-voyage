@@ -1,0 +1,68 @@
+# 環境變數
+.env
+
+# Firebase 金鑰
+FirebaseKey.json
+config/firebase-key.json
+
+# 系統檔案
+.DS_Store
+**/.DS_Store
+
+# Python 快取
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 虛擬環境
+venv/
+env/
+ENV/
+.venv/
+
+# Poetry
+poetry.lock
+
+# Streamlit
+.streamlit/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.kiro/
+
+# 日誌檔案
+*.log
+logs/
+
+# 測試覆蓋率
+.coverage
+htmlcov/
+.pytest_cache/
+
+# 其他敏感檔案
+*.key
+*.pem
+*.p12
+secrets/
+config/secrets/
